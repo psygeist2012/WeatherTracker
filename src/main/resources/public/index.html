@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <title>Plan your day - check weather now!</title>
+
+        <!--CSS-->
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/weatherapp.css">
+
+        <!--JS-->
+        <script src="lib/angular/angular.min.js"></script>
+        <script src="lib/angular/angular-filter.js"></script>
+        <script src="lib/jquery/jquery.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/weatherApp.js"></script>
+        <script src="js/controllers/weatherCtrl.js"></script>
+
+    </head>
+
+    <body>
+        <h1>Plan your day - check weather now!</h1>
+
+        <div ng-app="weatherApp">
+            <div ng-controller="weatherController as weather">
+                <div class="col-md-5">
+                    <form ng-submit="refresh()">
+                        <input type="text" ng-model="location" placeholder="Type location and hit enter to fetch weather forecast"/>
+                    </form>
+                    <div class="key">
+                        <h3><span class="clouds">Clouds</span> |<span class="rain">Rain</span> | <span class="snow">Snow</span> | <span class="clear">Clear</span> </h3>
+                    </div>
+                    <div ng-if="weatherData.city.name">
+                        <h2>{{weatherData.city.name}}, {{weatherData.city.country}}</h2>
+                        <h4>Temperatures are in Kelvin</h4> <br><br>
+
+                        <h1>{{weatherData.list[0].main.temp}} 'K</h1>
+                        <h2>{{weatherData.list[0].weather[0].description}}</h2>
+                        <h2>Humidity: {{weatherData.list[0].main.humidity}} %</h2>
+                        <h2>Wind speed: {{weatherData.list[0].wind.speed}} m/s</h2>
+                        <h2>Today's min temp: {{weatherData.list[0].main.temp_min}}</h2>
+                        <h2>Today's min temp: {{weatherData.list[0].main.temp_max}}</h2>
+                    </div>
+                </div>
+
+                <h2 class="loading">Fetching weather details...</h2>
+
+                <div ng-repeat="(key, value) in weatherData.list | groupBy: 'date'" class="col-md-1">
+                    <h4> {{ key }} </h4>
+
+                    <div ng-repeat="item in value" class="row">
+                        <p ng-class="{clear: item.weather[0].main == 'Clear', clouds: item.weather[0].main == 'Clouds', rain: item.weather[0].main == 'Rain', snow: item.weather[0].main == 'Snow'}">
+                            {{item.dt_txt}}<br>
+                            {{item.weather[0].description}}<br>
+                            Temp: {{item.main.temp}}<br>
+                            Min Temp: {{item.main.temp_min}}<br>
+                            Max Temp: {{item.main.temp_max}}<br>
+                            Humidity: {{item.main.humidity}}<br>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>
+

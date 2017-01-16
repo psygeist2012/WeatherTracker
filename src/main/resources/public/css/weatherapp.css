@@ -1,0 +1,47 @@
+body {
+	text-align:center;
+	padding:0px 30px 30px;
+	line-height:1.3;
+	background: url('../images/background.png') no-repeat center center fixed;
+	background-size: cover;
+	}
+
+p {
+	width: 90%;
+	margin: 5px auto;
+	}
+
+input {
+	align: left
+	padding:10px;
+	margin:5px;
+	width:80%;
+	font-size:2em;
+	text-align:center;
+	}
+
+h1, h2, h4 {
+    color: #ECF0F1;
+}
+
+
+.rain {
+	/*background: #BAE8E7;*/
+	background-image: url('../images/rain.png');
+	}
+
+.clear {
+	background-image: url('../images/clear.png');
+	}
+
+.clouds {
+	background-image: url('../images/clouds.png');
+	}
+
+.snow {
+	background-image: url('../images/snow.png');
+	}
+
+.error {
+	color:red;
+	}
